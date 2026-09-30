@@ -1,5 +1,5 @@
 /** Enlaces compartidos del sitio. */
-export const GITHUB = 'https://github.com/crsolver/hacha2';
+export const GITHUB = 'https://github.com/crsolver/cometa';
 
 /** Ruta del sitio en GitHub Pages (https://crsolver.github.io/cometadev/). */
 export const BASE = '/cometadev';
