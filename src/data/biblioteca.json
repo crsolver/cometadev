@@ -1,0 +1,1416 @@
+[
+	{
+		"nombre": "audio",
+		"ruta": "std/pincel/audio",
+		"doc": "Reproduce y controla sonidos: reproducir, pausar, reanudar, detener y ajustar el volumen.",
+		"tipos": [
+			{
+				"nombre": "Reproduccion",
+				"doc": "Una reproducción de sonido en curso, devuelta por audio.reproducir; permite pausarla, reanudarla o detenerla."
+			},
+			{
+				"nombre": "Sonido",
+				"doc": "Un sonido cargado con recursos.sonido, listo para reproducirse con audio.reproducir."
+			}
+		],
+		"funciones": [
+			{
+				"nombre": "reproducir",
+				"firma": "reproducir(sonido audio.Sonido, volumen decimal = 1, bucle bool = falso) audio.Reproduccion",
+				"doc": "Empieza a reproducir `sonido` con el volumen y modo de bucle dados, y devuelve la Reproduccion para controlarla luego."
+			},
+			{
+				"nombre": "pausar",
+				"firma": "pausar(reproduccion audio.Reproduccion)",
+				"doc": "Pausa una reproducción en curso; puede reanudarse después con audio.reanudar."
+			},
+			{
+				"nombre": "reanudar",
+				"firma": "reanudar(reproduccion audio.Reproduccion)",
+				"doc": "Continúa una reproducción previamente pausada."
+			},
+			{
+				"nombre": "detener",
+				"firma": "detener(reproduccion audio.Reproduccion)",
+				"doc": "Detiene la reproducción por completo (a diferencia de pausar, no puede reanudarse desde donde iba)."
+			},
+			{
+				"nombre": "volumen",
+				"firma": "volumen(reproduccion audio.Reproduccion, valor decimal)",
+				"doc": "Cambia el volumen de una reproducción ya iniciada (0 = silencio, 1 = volumen original)."
+			}
+		]
+	},
+	{
+		"nombre": "azar",
+		"ruta": "std/azar",
+		"doc": "Números aleatorios simples para juegos: un real o un entero dentro de un rango, y una semilla para que las partidas sean reproducibles.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "real",
+				"firma": "real(minimo decimal, maximo decimal) decimal",
+				"doc": "Un decimal aleatorio uniforme dentro de [minimo, maximo]."
+			},
+			{
+				"nombre": "entero",
+				"firma": "entero(minimo entero, maximo entero) entero",
+				"doc": "Un entero aleatorio uniforme en [minimo, maximo): incluye minimo y excluye maximo, como los rangos a..b. Para un dado usa azar.entero(1, 7). Si minimo == maximo devuelve minimo."
+			},
+			{
+				"nombre": "semilla",
+				"firma": "semilla(valor entero)",
+				"doc": "Fija la semilla del generador: con la misma semilla, azar.entero y azar.real producen siempre la misma secuencia (niveles reproducibles, partidas del día). Sin llamarla, cada ejecución es distinta."
+			}
+		]
+	},
+	{
+		"nombre": "color",
+		"ruta": "std/pincel/color",
+		"doc": "El tipo Color y una forma de construir colores propios a partir de sus componentes r, g, b, a.",
+		"tipos": [
+			{
+				"nombre": "Color",
+				"doc": "Un color RGBA. Usa las constantes con nombre (por ejemplo .Rojo) o color.rgba para crear uno propio.",
+				"constantes": [
+					".Amarillo",
+					".Azul",
+					".AzulIndigo",
+					".AzulNoche",
+					".Blanco",
+					".Caqui",
+					".Carbon",
+					".Celeste",
+					".Crema",
+					".Gris",
+					".Indigo",
+					".Malva",
+					".Marron",
+					".Negro",
+					".Ocre",
+					".Oliva",
+					".Petroleo",
+					".Rojo",
+					".Rosa",
+					".Transparente",
+					".Verde",
+					".VerdeBosque",
+					".VerdePino",
+					".Violeta",
+					".VioletaOscuro"
+				]
+			}
+		],
+		"funciones": [
+			{
+				"nombre": "rgba",
+				"firma": "rgba(r entero, g entero, b entero, a entero = 255) color.Color",
+				"doc": "Construye un Color a partir de sus componentes rojo, verde, azul y alfa (0-255 cada uno; alfa por defecto totalmente opaco)."
+			}
+		]
+	},
+	{
+		"nombre": "curvas",
+		"ruta": "std/mate/curvas",
+		"doc": "31 funciones de easing puras (sin estado) para animar valores de forma más natural que una interpolación lineal. Ver docs/curvas.md.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "lineal",
+				"firma": "lineal(progreso decimal) decimal",
+				"doc": "Progreso sin transformar: lineal(t) = t. Útil como referencia para comparar con las demás curvas."
+			},
+			{
+				"nombre": "cuadratica_entrada",
+				"firma": "cuadratica_entrada(progreso decimal) decimal",
+				"doc": "Arranca lento y acelera hacia el final (ease-in cuadrático)."
+			},
+			{
+				"nombre": "cuadratica_salida",
+				"firma": "cuadratica_salida(progreso decimal) decimal",
+				"doc": "Arranca rápido y frena hacia el final (ease-out cuadrático)."
+			},
+			{
+				"nombre": "cuadratica_entrada_salida",
+				"firma": "cuadratica_entrada_salida(progreso decimal) decimal",
+				"doc": "Arranca y termina lento, acelera en el medio (ease-in-out cuadrático)."
+			},
+			{
+				"nombre": "cubica_entrada",
+				"firma": "cubica_entrada(progreso decimal) decimal",
+				"doc": "Como cuadratica_entrada pero con una aceleración más marcada (ease-in cúbico)."
+			},
+			{
+				"nombre": "cubica_salida",
+				"firma": "cubica_salida(progreso decimal) decimal",
+				"doc": "Como cuadratica_salida pero con un frenado más marcado (ease-out cúbico)."
+			},
+			{
+				"nombre": "cubica_entrada_salida",
+				"firma": "cubica_entrada_salida(progreso decimal) decimal",
+				"doc": "Ease-in-out cúbico: transición más pronunciada que la cuadrática en ambos extremos."
+			},
+			{
+				"nombre": "cuartica_entrada",
+				"firma": "cuartica_entrada(progreso decimal) decimal",
+				"doc": "Ease-in de cuarto grado: arranque aún más lento que el cúbico."
+			},
+			{
+				"nombre": "cuartica_salida",
+				"firma": "cuartica_salida(progreso decimal) decimal",
+				"doc": "Ease-out de cuarto grado: frenado aún más marcado que el cúbico."
+			},
+			{
+				"nombre": "cuartica_entrada_salida",
+				"firma": "cuartica_entrada_salida(progreso decimal) decimal",
+				"doc": "Ease-in-out de cuarto grado."
+			},
+			{
+				"nombre": "quintica_entrada",
+				"firma": "quintica_entrada(progreso decimal) decimal",
+				"doc": "Ease-in de quinto grado: el arranque más suave de la familia polinómica."
+			},
+			{
+				"nombre": "quintica_salida",
+				"firma": "quintica_salida(progreso decimal) decimal",
+				"doc": "Ease-out de quinto grado: el frenado más suave de la familia polinómica."
+			},
+			{
+				"nombre": "quintica_entrada_salida",
+				"firma": "quintica_entrada_salida(progreso decimal) decimal",
+				"doc": "Ease-in-out de quinto grado."
+			},
+			{
+				"nombre": "senoidal_entrada",
+				"firma": "senoidal_entrada(progreso decimal) decimal",
+				"doc": "Arranque suave basado en una onda seno (más suave que el cuadrático, menos marcado que el cúbico)."
+			},
+			{
+				"nombre": "senoidal_salida",
+				"firma": "senoidal_salida(progreso decimal) decimal",
+				"doc": "Frenado suave basado en una onda seno."
+			},
+			{
+				"nombre": "senoidal_entrada_salida",
+				"firma": "senoidal_entrada_salida(progreso decimal) decimal",
+				"doc": "Ease-in-out basado en una onda seno."
+			},
+			{
+				"nombre": "circular_entrada",
+				"firma": "circular_entrada(progreso decimal) decimal",
+				"doc": "Arranque basado en un cuarto de círculo: se siente distinto a las curvas polinómicas o senoidales."
+			},
+			{
+				"nombre": "circular_salida",
+				"firma": "circular_salida(progreso decimal) decimal",
+				"doc": "Frenado basado en un cuarto de círculo."
+			},
+			{
+				"nombre": "circular_entrada_salida",
+				"firma": "circular_entrada_salida(progreso decimal) decimal",
+				"doc": "Ease-in-out circular."
+			},
+			{
+				"nombre": "exponencial_entrada",
+				"firma": "exponencial_entrada(progreso decimal) decimal",
+				"doc": "Arranque casi plano que se dispara al final (crecimiento exponencial)."
+			},
+			{
+				"nombre": "exponencial_salida",
+				"firma": "exponencial_salida(progreso decimal) decimal",
+				"doc": "Salida disparada al principio que se aplana al final."
+			},
+			{
+				"nombre": "exponencial_entrada_salida",
+				"firma": "exponencial_entrada_salida(progreso decimal) decimal",
+				"doc": "Ease-in-out exponencial: muy plano en los extremos, muy rápido en el medio."
+			},
+			{
+				"nombre": "elastica_entrada",
+				"firma": "elastica_entrada(progreso decimal) decimal",
+				"doc": "Arranque con rebote tipo resorte antes de asentarse (efecto \"elástico\"). El resultado puede sobrepasar [0, 1]."
+			},
+			{
+				"nombre": "elastica_salida",
+				"firma": "elastica_salida(progreso decimal) decimal",
+				"doc": "Como elastica_entrada pero el rebote ocurre al llegar al final."
+			},
+			{
+				"nombre": "elastica_entrada_salida",
+				"firma": "elastica_entrada_salida(progreso decimal) decimal",
+				"doc": "Rebote elástico tanto al empezar como al terminar."
+			},
+			{
+				"nombre": "retroceso_entrada",
+				"firma": "retroceso_entrada(progreso decimal) decimal",
+				"doc": "Retrocede un poco antes de avanzar (como tomar impulso). El resultado puede sobrepasar [0, 1]."
+			},
+			{
+				"nombre": "retroceso_salida",
+				"firma": "retroceso_salida(progreso decimal) decimal",
+				"doc": "Se pasa un poco del destino antes de asentarse."
+			},
+			{
+				"nombre": "retroceso_entrada_salida",
+				"firma": "retroceso_entrada_salida(progreso decimal) decimal",
+				"doc": "Retroceso al empezar y sobrepaso al terminar."
+			},
+			{
+				"nombre": "rebote_entrada",
+				"firma": "rebote_entrada(progreso decimal) decimal",
+				"doc": "Simula una pelota que rebota antes de llegar al valor inicial, en reversa."
+			},
+			{
+				"nombre": "rebote_salida",
+				"firma": "rebote_salida(progreso decimal) decimal",
+				"doc": "Simula una pelota rebotando varias veces hasta quedarse quieta en el destino."
+			},
+			{
+				"nombre": "rebote_entrada_salida",
+				"firma": "rebote_entrada_salida(progreso decimal) decimal",
+				"doc": "Rebote tanto al empezar como al terminar."
+			}
+		]
+	},
+	{
+		"nombre": "datos",
+		"ruta": "std/pincel/datos",
+		"doc": "Guarda y lee pequeños datos de tu juego (mejor puntuación, opciones) como texto asociado a una clave; se conservan entre partidas en la carpeta de configuración del usuario.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "guardar",
+				"firma": "guardar(clave cadena, valor cadena) !",
+				"doc": "Guarda `valor` bajo `clave` en el disco y lo conserva entre partidas; falla si no se puede escribir. Combínalo con a_entero()/a_decimal() para guardar números."
+			},
+			{
+				"nombre": "leer",
+				"firma": "leer(clave cadena) cadena?",
+				"doc": "El valor guardado bajo `clave`, o .Ninguno si no existe todavía; por ejemplo datos.leer(\"mejor\") o \"0\"."
+			},
+			{
+				"nombre": "borrar",
+				"firma": "borrar(clave cadena) !",
+				"doc": "Elimina la clave; no falla si no existía."
+			}
+		]
+	},
+	{
+		"nombre": "entrada",
+		"ruta": "std/pincel/entrada",
+		"doc": "Lee el teclado, el ratón y los mandos (gamepads): teclas mantenidas, presionadas o soltadas, botones del ratón y su posición, y botones y palancas de los mandos.",
+		"tipos": [
+			{
+				"nombre": "BotonMando",
+				"doc": "Un botón de un mando estándar (.A, .B, .X, .Y, .Arriba, .HombroIzquierdo, .Inicio...), para usar con las funciones mando_*.",
+				"constantes": [
+					".A",
+					".Abajo",
+					".Arriba",
+					".Atras",
+					".B",
+					".Derecha",
+					".GatilloDerecho",
+					".GatilloIzquierdo",
+					".HombroDerecho",
+					".HombroIzquierdo",
+					".Inicio",
+					".Izquierda",
+					".PalancaDerecha",
+					".PalancaIzquierda",
+					".X",
+					".Y"
+				]
+			},
+			{
+				"nombre": "BotonRaton",
+				"doc": "Un botón del ratón (izquierdo, derecho o medio), para usar con las funciones de entrada.",
+				"constantes": [
+					".Derecho",
+					".Izquierdo",
+					".Medio"
+				]
+			},
+			{
+				"nombre": "EjeMando",
+				"doc": "Una palanca de un mando estándar (.IzquierdoX, .IzquierdoY, .DerechoX, .DerechoY) para entrada.mando_eje.",
+				"constantes": [
+					".DerechoX",
+					".DerechoY",
+					".IzquierdoX",
+					".IzquierdoY"
+				]
+			},
+			{
+				"nombre": "Tecla",
+				"doc": "Una tecla del teclado, para usar con las funciones de entrada.",
+				"constantes": [
+					".A",
+					".Abajo",
+					".Alt",
+					".Arriba",
+					".AvPag",
+					".B",
+					".C",
+					".Cero",
+					".Cinco",
+					".Control",
+					".ControlDerecho",
+					".ControlIzquierdo",
+					".Cuatro",
+					".D",
+					".Derecha",
+					".Dos",
+					".E",
+					".Enter",
+					".Escape",
+					".Espacio",
+					".F",
+					".F1",
+					".F10",
+					".F11",
+					".F12",
+					".F2",
+					".F3",
+					".F4",
+					".F5",
+					".F6",
+					".F7",
+					".F8",
+					".F9",
+					".Fin",
+					".G",
+					".H",
+					".I",
+					".Inicio",
+					".Izquierda",
+					".J",
+					".K",
+					".L",
+					".M",
+					".N",
+					".Nueve",
+					".O",
+					".Ocho",
+					".P",
+					".Q",
+					".R",
+					".RePag",
+					".Retroceso",
+					".S",
+					".Seis",
+					".Shift",
+					".ShiftDerecho",
+					".ShiftIzquierdo",
+					".Siete",
+					".Suprimir",
+					".T",
+					".Tab",
+					".Tres",
+					".U",
+					".Uno",
+					".V",
+					".W",
+					".X",
+					".Y",
+					".Z"
+				]
+			}
+		],
+		"funciones": [
+			{
+				"nombre": "tecla_mantenida",
+				"firma": "tecla_mantenida(tecla entrada.Tecla) bool",
+				"doc": "verdadero mientras la tecla está presionada (se dispara en cada cuadro que sigue sostenida)."
+			},
+			{
+				"nombre": "tecla_presionada",
+				"firma": "tecla_presionada(tecla entrada.Tecla) bool",
+				"doc": "verdadero solo en el cuadro en que la tecla empezó a presionarse."
+			},
+			{
+				"nombre": "tecla_soltada",
+				"firma": "tecla_soltada(tecla entrada.Tecla) bool",
+				"doc": "verdadero solo en el cuadro en que la tecla se soltó."
+			},
+			{
+				"nombre": "raton_mantenido",
+				"firma": "raton_mantenido(boton entrada.BotonRaton) bool",
+				"doc": "verdadero mientras el botón del ratón está presionado."
+			},
+			{
+				"nombre": "raton_presionado",
+				"firma": "raton_presionado(boton entrada.BotonRaton) bool",
+				"doc": "verdadero solo en el cuadro en que el botón del ratón empezó a presionarse."
+			},
+			{
+				"nombre": "raton_soltado",
+				"firma": "raton_soltado(boton entrada.BotonRaton) bool",
+				"doc": "verdadero solo en el cuadro en que el botón del ratón se soltó."
+			},
+			{
+				"nombre": "posicion_raton",
+				"firma": "posicion_raton() mate.Vec2",
+				"doc": "Posición actual del cursor en coordenadas de pantalla."
+			},
+			{
+				"nombre": "rueda",
+				"firma": "rueda() mate.Vec2",
+				"doc": "Desplazamiento de la rueda del ratón en este cuadro (normalmente pequeño; suma cero cuando no se mueve)."
+			},
+			{
+				"nombre": "mandos",
+				"firma": "mandos() entero",
+				"doc": "Cuántos mandos (gamepads) con distribución estándar hay conectados; se numeran desde 0."
+			},
+			{
+				"nombre": "mando_boton",
+				"firma": "mando_boton(mando entero, boton entrada.BotonMando) bool",
+				"doc": "verdadero mientras el botón del mando número `mando` está pulsado (falso si ese mando no existe)."
+			},
+			{
+				"nombre": "mando_boton_presionado",
+				"firma": "mando_boton_presionado(mando entero, boton entrada.BotonMando) bool",
+				"doc": "verdadero solo en el cuadro en que se pulsó el botón del mando."
+			},
+			{
+				"nombre": "mando_eje",
+				"firma": "mando_eje(mando entero, eje entrada.EjeMando, zona_muerta decimal = 0.15) decimal",
+				"doc": "Posición de una palanca en [-1, 1]; los valores por debajo de `zona_muerta` (0.15 por defecto) se tratan como 0 para ignorar el temblor. Devuelve 0 si el mando no existe."
+			}
+		]
+	},
+	{
+		"nombre": "graficos",
+		"ruta": "std/pincel/graficos",
+		"doc": "Dibuja formas, imágenes, hojas de sprites y texto en pantalla, y controla la cámara 2D. Todo lo que ves en pantalla pasa por aquí.",
+		"tipos": [
+			{
+				"nombre": "Camara2D",
+				"doc": "Una cámara 2D: posición, origen (punto de la pantalla que corresponde a `pos`), zoom y rotación.",
+				"campos": [
+					"pos Vec2",
+					"origen Vec2",
+					"zoom decimal",
+					"rotacion decimal"
+				]
+			},
+			{
+				"nombre": "Fuente",
+				"doc": "Una fuente tipográfica cargada con recursos.fuente, lista para usarse con graficos.texto."
+			},
+			{
+				"nombre": "Hoja",
+				"doc": "Una imagen dividida en cuadros iguales (creada con graficos.hoja), para dibujar sprites y tiles por número."
+			},
+			{
+				"nombre": "Imagen",
+				"doc": "Una imagen cargada o creada con lienzo, lista para dibujarse con graficos.imagen y funciones relacionadas."
+			}
+		],
+		"funciones": [
+			{
+				"nombre": "limpiar",
+				"firma": "limpiar(color color.Color)",
+				"doc": "Pinta toda la pantalla del color dado. Suele ser lo primero que se llama en pintar().",
+				"dibujo": true
+			},
+			{
+				"nombre": "rectangulo",
+				"firma": "rectangulo(x decimal, y decimal, ancho decimal, alto decimal, color color.Color, origen mate.Vec2 = {}, rotacion decimal = 0)",
+				"doc": "Dibuja un rectángulo en (x, y) con el ancho y alto dados. `origen` desplaza el punto de referencia dentro del rectángulo (por defecto la esquina superior izquierda).",
+				"dibujo": true
+			},
+			{
+				"nombre": "rectangulo_v",
+				"firma": "rectangulo_v(pos mate.Vec2, tamano mate.Vec2, color color.Color, origen mate.Vec2 = {}, rotacion decimal = 0)",
+				"doc": "Como graficos.rectangulo pero recibiendo posición y tamaño como Vec2.",
+				"dibujo": true
+			},
+			{
+				"nombre": "rectangulo_rect",
+				"firma": "rectangulo_rect(rect mate.Rect, color color.Color, origen mate.Vec2 = {}, rotacion decimal = 0)",
+				"doc": "Dibuja el Rect dado directamente.",
+				"dibujo": true
+			},
+			{
+				"nombre": "circulo",
+				"firma": "circulo(x decimal, y decimal, radio decimal, color color.Color)",
+				"doc": "Dibuja un círculo relleno centrado en (x, y) con el radio dado.",
+				"dibujo": true
+			},
+			{
+				"nombre": "circulo_v",
+				"firma": "circulo_v(centro mate.Vec2, radio decimal, color color.Color)",
+				"doc": "Como graficos.circulo pero recibiendo el centro como Vec2.",
+				"dibujo": true
+			},
+			{
+				"nombre": "linea",
+				"firma": "linea(x1 decimal, y1 decimal, x2 decimal, y2 decimal, color color.Color, grosor decimal = 1)",
+				"doc": "Dibuja una línea recta entre (x1, y1) y (x2, y2) con el grosor dado.",
+				"dibujo": true
+			},
+			{
+				"nombre": "linea_v",
+				"firma": "linea_v(a mate.Vec2, b mate.Vec2, color color.Color, grosor decimal = 1)",
+				"doc": "Como graficos.linea pero recibiendo ambos puntos como Vec2.",
+				"dibujo": true
+			},
+			{
+				"nombre": "imagen",
+				"firma": "imagen(imagen graficos.Imagen, x decimal, y decimal, origen mate.Vec2 = {}, escala mate.Vec2 = {x: 1, y: 1}, rotacion decimal = 0, tinte color.Color = .Blanco)",
+				"doc": "Dibuja `imagen` en (x, y). `escala` y `rotacion` transforman la imagen alrededor de `origen`; `tinte` la colorea.",
+				"dibujo": true
+			},
+			{
+				"nombre": "imagen_v",
+				"firma": "imagen_v(imagen graficos.Imagen, pos mate.Vec2, origen mate.Vec2 = {}, escala mate.Vec2 = {x: 1, y: 1}, rotacion decimal = 0, tinte color.Color = .Blanco)",
+				"doc": "Como graficos.imagen pero recibiendo la posición como Vec2.",
+				"dibujo": true
+			},
+			{
+				"nombre": "imagen_rect",
+				"firma": "imagen_rect(imagen graficos.Imagen, destino mate.Rect, origen mate.Vec2 = {}, rotacion decimal = 0, tinte color.Color = .Blanco)",
+				"doc": "Dibuja `imagen` estirada o encogida para llenar exactamente el Rect `destino`.",
+				"dibujo": true
+			},
+			{
+				"nombre": "region",
+				"firma": "region(imagen graficos.Imagen, fuente mate.Rect, x decimal, y decimal, origen mate.Vec2 = {}, escala mate.Vec2 = {x: 1, y: 1}, rotacion decimal = 0, tinte color.Color = .Blanco)",
+				"doc": "Dibuja solo la región `fuente` (un recorte) de `imagen`, en (x, y). Útil para hojas de sprites (spritesheets).",
+				"dibujo": true
+			},
+			{
+				"nombre": "region_v",
+				"firma": "region_v(imagen graficos.Imagen, fuente mate.Rect, pos mate.Vec2, origen mate.Vec2 = {}, escala mate.Vec2 = {x: 1, y: 1}, rotacion decimal = 0, tinte color.Color = .Blanco)",
+				"doc": "Como graficos.region pero recibiendo la posición como Vec2.",
+				"dibujo": true
+			},
+			{
+				"nombre": "region_rect",
+				"firma": "region_rect(imagen graficos.Imagen, fuente mate.Rect, destino mate.Rect, origen mate.Vec2 = {}, rotacion decimal = 0, tinte color.Color = .Blanco)",
+				"doc": "Como graficos.region pero estirando el recorte para llenar el Rect `destino`.",
+				"dibujo": true
+			},
+			{
+				"nombre": "texto",
+				"firma": "texto(texto cadena, fuente graficos.Fuente, x decimal, y decimal, tamano decimal = 20, color color.Color = .Blanco, origen mate.Vec2 = {}, rotacion decimal = 0)",
+				"doc": "Dibuja `texto` con la fuente dada en (x, y), con el tamaño y color indicados.",
+				"dibujo": true
+			},
+			{
+				"nombre": "texto_v",
+				"firma": "texto_v(texto cadena, fuente graficos.Fuente, pos mate.Vec2, tamano decimal = 20, color color.Color = .Blanco, origen mate.Vec2 = {}, rotacion decimal = 0)",
+				"doc": "Como graficos.texto pero recibiendo la posición como Vec2.",
+				"dibujo": true
+			},
+			{
+				"nombre": "hoja",
+				"firma": "hoja(imagen graficos.Imagen, ancho_cuadro entero, alto_cuadro entero) graficos.Hoja",
+				"doc": "Divide `imagen` en cuadros iguales de `ancho_cuadro` x `alto_cuadro`, numerados de izquierda a derecha y de arriba abajo empezando en 0. Funciona con imágenes cargadas o creadas con lienzo."
+			},
+			{
+				"nombre": "cuadros",
+				"firma": "cuadros(hoja graficos.Hoja) entero",
+				"doc": "La cantidad de cuadros de la hoja."
+			},
+			{
+				"nombre": "tamano_cuadro",
+				"firma": "tamano_cuadro(hoja graficos.Hoja) mate.Vec2",
+				"doc": "El tamaño de cada cuadro de la hoja, como Vec2."
+			},
+			{
+				"nombre": "cuadro",
+				"firma": "cuadro(hoja graficos.Hoja, indice entero, x decimal, y decimal, origen mate.Vec2 = {}, escala mate.Vec2 = {x: 1, y: 1}, rotacion decimal = 0, tinte color.Color = .Blanco, espejo_h bool = falso, espejo_v bool = falso)",
+				"doc": "Dibuja el cuadro `indice` de la hoja en (x, y); admite origen, escala, rotación, tinte y espejo horizontal/vertical (el cuadro se voltea dentro de su propio rectángulo). Un índice fuera de la hoja no dibuja nada, así que -1 sirve como «vacío».",
+				"dibujo": true
+			},
+			{
+				"nombre": "cuadro_v",
+				"firma": "cuadro_v(hoja graficos.Hoja, indice entero, pos mate.Vec2, origen mate.Vec2 = {}, escala mate.Vec2 = {x: 1, y: 1}, rotacion decimal = 0, tinte color.Color = .Blanco, espejo_h bool = falso, espejo_v bool = falso)",
+				"doc": "Como graficos.cuadro pero recibiendo la posición como Vec2.",
+				"dibujo": true
+			},
+			{
+				"nombre": "medir_texto",
+				"firma": "medir_texto(texto cadena, fuente graficos.Fuente, tamano decimal = 20) mate.Vec2",
+				"doc": "Ancho y alto (como Vec2) que ocuparía `texto` con esa fuente y tamaño; sirve para centrar o alinear. Se puede llamar en cualquier momento."
+			},
+			{
+				"nombre": "texto_depuracion",
+				"firma": "texto_depuracion(texto cadena, x decimal = 0, y decimal = 0)",
+				"doc": "Dibuja texto con la fuente de depuración incorporada (sin necesitar cargar ninguna fuente). Pensado para mensajes rápidos de FPS/estado, no para el juego final.",
+				"dibujo": true
+			},
+			{
+				"nombre": "texto_depuracion_v",
+				"firma": "texto_depuracion_v(texto cadena, pos mate.Vec2 = {})",
+				"doc": "Como graficos.texto_depuracion pero recibiendo la posición como Vec2.",
+				"dibujo": true
+			},
+			{
+				"nombre": "tamano",
+				"firma": "tamano() mate.Vec2",
+				"doc": "El tamaño actual de la ventana/pantalla lógica, como Vec2."
+			},
+			{
+				"nombre": "usar_camara",
+				"firma": "usar_camara(camara graficos.Camara2D)",
+				"doc": "A partir de aquí, todo lo dibujado usa la cámara 2D dada (desplazamiento, zoom y rotación) hasta la próxima llamada a usar_camara o restablecer_camara.",
+				"dibujo": true
+			},
+			{
+				"nombre": "restablecer_camara",
+				"firma": "restablecer_camara()",
+				"doc": "Vuelve a dibujar en coordenadas de pantalla normales, deshaciendo el efecto de usar_camara.",
+				"dibujo": true
+			}
+		]
+	},
+	{
+		"nombre": "lienzo",
+		"ruta": "std/pincel/lienzo",
+		"doc": "Crea y edita imágenes (graficos.Imagen) directamente en código: píxel a píxel, con texto o combinando otras imágenes. Ideal para arte generado sin necesitar archivos externos. Ver docs/lienzo.md.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "nuevo",
+				"firma": "nuevo(ancho entero, alto entero, color color.Color = .Transparente) graficos.Imagen",
+				"doc": "Crea una Imagen en blanco de `ancho` x `alto`, rellena con `color` (transparente por defecto)."
+			},
+			{
+				"nombre": "desde_texto",
+				"firma": "desde_texto(filas [cadena], colores [cadena: color.Color]) graficos.Imagen",
+				"doc": "Construye un sprite a partir de un dibujo hecho con texto: cada carácter de `filas` se traduce a un color de `colores` (. o espacio = transparente)."
+			},
+			{
+				"nombre": "hoja_desde_texto",
+				"firma": "hoja_desde_texto(cuadros [[cadena]], colores [cadena: color.Color]) [graficos.Imagen]",
+				"doc": "Como lienzo.desde_texto pero para varios cuadros a la vez (una hoja de sprites), devolviendo una lista de imágenes."
+			},
+			{
+				"nombre": "ancho",
+				"firma": "ancho(imagen graficos.Imagen) entero",
+				"doc": "Ancho en píxeles de la imagen."
+			},
+			{
+				"nombre": "alto",
+				"firma": "alto(imagen graficos.Imagen) entero",
+				"doc": "Alto en píxeles de la imagen."
+			},
+			{
+				"nombre": "copiar",
+				"firma": "copiar(imagen graficos.Imagen) graficos.Imagen",
+				"doc": "Copia independiente de la imagen: modificar la copia no afecta a la original."
+			},
+			{
+				"nombre": "limpiar",
+				"firma": "limpiar(imagen graficos.Imagen, color color.Color = .Transparente)",
+				"doc": "Rellena toda la imagen con `color` (transparente por defecto), borrando lo que hubiera antes."
+			},
+			{
+				"nombre": "pixel",
+				"firma": "pixel(imagen graficos.Imagen, x entero, y entero, color color.Color)",
+				"doc": "Pinta un único píxel en (x, y) del color dado."
+			},
+			{
+				"nombre": "leer_pixel",
+				"firma": "leer_pixel(imagen graficos.Imagen, x entero, y entero) color.Color?",
+				"doc": "El color del píxel en (x, y), o Ninguno si (x, y) queda fuera de la imagen."
+			},
+			{
+				"nombre": "rect",
+				"firma": "rect(imagen graficos.Imagen, x entero, y entero, ancho entero, alto entero, color color.Color, relleno bool = verdadero)",
+				"doc": "Dibuja un rectángulo dentro de la imagen; `relleno` decide si se pinta macizo o solo el borde."
+			},
+			{
+				"nombre": "linea",
+				"firma": "linea(imagen graficos.Imagen, x1 entero, y1 entero, x2 entero, y2 entero, color color.Color)",
+				"doc": "Dibuja una línea recta entre dos puntos dentro de la imagen."
+			},
+			{
+				"nombre": "circulo",
+				"firma": "circulo(imagen graficos.Imagen, x entero, y entero, radio entero, color color.Color, relleno bool = verdadero)",
+				"doc": "Dibuja un círculo dentro de la imagen; `relleno` decide si se pinta macizo o solo el borde."
+			},
+			{
+				"nombre": "rellenar",
+				"firma": "rellenar(imagen graficos.Imagen, x entero, y entero, color color.Color)",
+				"doc": "Relleno por inundación (flood fill): pinta del color dado toda el área conectada al píxel (x, y) que comparte su color original."
+			},
+			{
+				"nombre": "pegar",
+				"firma": "pegar(destino graficos.Imagen, fuente graficos.Imagen, x entero, y entero, espejo_h bool = falso, espejo_v bool = falso)",
+				"doc": "Copia `fuente` sobre `destino` en (x, y), respetando la transparencia. `espejo_h`/`espejo_v` voltean la fuente antes de pegarla."
+			},
+			{
+				"nombre": "guardar",
+				"firma": "guardar(imagen graficos.Imagen, ruta cadena, escala entero = 1) !",
+				"doc": "Exporta la imagen como archivo PNG en `ruta`, opcionalmente ampliada por `escala` (útil para inspeccionar píxel arte de cerca)."
+			}
+		]
+	},
+	{
+		"nombre": "mate",
+		"ruta": "std/mate",
+		"doc": "Funciones matemáticas de uso general: valores absolutos, redondeo, trigonometría y el tipo Vec2/Rect para trabajar con posiciones y áreas.",
+		"tipos": [
+			{
+				"nombre": "Rect",
+				"doc": "Un rectángulo alineado a los ejes, definido por su posición (pos) y tamaño (tamano).",
+				"campos": [
+					"pos Vec2",
+					"tamano Vec2"
+				],
+				"metodos": [
+					{
+						"nombre": "interseca",
+						"firma": "interseca(otro mate.Rect) bool",
+						"doc": "verdadero si este rectángulo se superpone con `otro`, aunque sea parcialmente."
+					},
+					{
+						"nombre": "contiene",
+						"firma": "contiene(punto mate.Vec2) bool",
+						"doc": "verdadero si `punto` cae dentro de este rectángulo."
+					},
+					{
+						"nombre": "centro",
+						"firma": "centro() mate.Vec2",
+						"doc": "El punto central de este rectángulo."
+					},
+					{
+						"nombre": "interseccion",
+						"firma": "interseccion(otro mate.Rect) mate.Rect",
+						"doc": "El rectángulo donde se superponen ambos; tiene tamaño cero si no se tocan."
+					},
+					{
+						"nombre": "desplazado",
+						"firma": "desplazado(delta mate.Vec2) mate.Rect",
+						"doc": "Una copia de este rectángulo movida `delta`."
+					},
+					{
+						"nombre": "colision_circulo",
+						"firma": "colision_circulo(centro mate.Vec2, radio decimal) bool",
+						"doc": "verdadero si un círculo con ese centro y radio toca este rectángulo."
+					}
+				]
+			},
+			{
+				"nombre": "Vec2",
+				"doc": "Un vector/punto 2D: dos números decimales, x e y.",
+				"campos": [
+					"x decimal",
+					"y decimal"
+				],
+				"metodos": [
+					{
+						"nombre": "longitud",
+						"firma": "longitud() decimal",
+						"doc": "La magnitud (largo) del vector, es decir su distancia al origen (0, 0)."
+					},
+					{
+						"nombre": "normalizado",
+						"firma": "normalizado() mate.Vec2",
+						"doc": "El mismo vector pero con longitud 1 (misma dirección, sin importar la magnitud original)."
+					},
+					{
+						"nombre": "distancia_a",
+						"firma": "distancia_a(otro mate.Vec2) decimal",
+						"doc": "La distancia entre este vector y `otro`, tratados como puntos."
+					},
+					{
+						"nombre": "producto_punto",
+						"firma": "producto_punto(otro mate.Vec2) decimal",
+						"doc": "El producto punto (dot product) con `otro`: útil para saber qué tan alineados están dos vectores."
+					},
+					{
+						"nombre": "rotado",
+						"firma": "rotado(angulo decimal) mate.Vec2",
+						"doc": "El mismo vector rotado `angulo` radianes alrededor del origen."
+					},
+					{
+						"nombre": "colision_circulo",
+						"firma": "colision_circulo(radio decimal, otro mate.Vec2, radio_otro decimal) bool",
+						"doc": "verdadero si un círculo de este radio centrado aquí se superpone con un círculo de `radio_otro` centrado en `otro`."
+					},
+					{
+						"nombre": "angulo",
+						"firma": "angulo() decimal",
+						"doc": "Ángulo en radianes del vector respecto al eje x (0 apunta a la derecha; la y crece hacia abajo)."
+					},
+					{
+						"nombre": "interpolar",
+						"firma": "interpolar(otro mate.Vec2, t decimal) mate.Vec2",
+						"doc": "El punto que está a la fracción `t` (0 a 1) del camino entre este vector y `otro`."
+					},
+					{
+						"nombre": "reflejar",
+						"firma": "reflejar(normal mate.Vec2) mate.Vec2",
+						"doc": "Este vector rebotado contra una superficie cuya normal (de longitud 1) es `normal`; útil para que una pelota rebote."
+					},
+					{
+						"nombre": "perpendicular",
+						"firma": "perpendicular() mate.Vec2",
+						"doc": "Un vector de la misma longitud girado 90 grados en el sentido de las agujas del reloj en pantalla."
+					}
+				]
+			}
+		],
+		"constantes": [
+			"pi decimal = 3.141592653589793"
+		],
+		"funciones": [
+			{
+				"nombre": "absoluto",
+				"firma": "absoluto(valor decimal) decimal",
+				"doc": "Valor absoluto: siempre positivo o cero. Ejemplo: absoluto(-5) → 5"
+			},
+			{
+				"nombre": "minimo",
+				"firma": "minimo(a decimal, b decimal) decimal",
+				"doc": "El menor de dos valores. Ejemplo: minimo(3, 7) → 3"
+			},
+			{
+				"nombre": "maximo",
+				"firma": "maximo(a decimal, b decimal) decimal",
+				"doc": "El mayor de dos valores. Ejemplo: maximo(3, 7) → 7"
+			},
+			{
+				"nombre": "limitar",
+				"firma": "limitar(valor decimal, minimo decimal, maximo decimal) decimal",
+				"doc": "Recorta `valor` para que quede dentro de [minimo, maximo]. Ejemplo: limitar(150, 0, 100) → 100"
+			},
+			{
+				"nombre": "interpolar",
+				"firma": "interpolar(a decimal, b decimal, t decimal) decimal",
+				"doc": "Interpola linealmente entre a y b según t (0 = a, 1 = b, 0.5 = el punto medio). Ejemplo: interpolar(0, 10, 0.5) → 5"
+			},
+			{
+				"nombre": "piso",
+				"firma": "piso(valor decimal) entero",
+				"doc": "Redondea hacia abajo al entero más cercano. Ejemplo: piso(2.9) → 2"
+			},
+			{
+				"nombre": "techo",
+				"firma": "techo(valor decimal) entero",
+				"doc": "Redondea hacia arriba al entero más cercano. Ejemplo: techo(2.1) → 3"
+			},
+			{
+				"nombre": "redondear",
+				"firma": "redondear(valor decimal) entero",
+				"doc": "Redondea al entero más cercano (0.5 redondea hacia arriba). Ejemplo: redondear(2.5) → 3"
+			},
+			{
+				"nombre": "raiz",
+				"firma": "raiz(valor decimal) decimal",
+				"doc": "Raíz cuadrada. Ejemplo: raiz(9) → 3"
+			},
+			{
+				"nombre": "seno",
+				"firma": "seno(angulo decimal) decimal",
+				"doc": "Seno del ángulo dado en radianes."
+			},
+			{
+				"nombre": "coseno",
+				"firma": "coseno(angulo decimal) decimal",
+				"doc": "Coseno del ángulo dado en radianes."
+			},
+			{
+				"nombre": "atan2",
+				"firma": "atan2(y decimal, x decimal) decimal",
+				"doc": "Ángulo en radianes del vector (x, y) respecto al eje x, considerando el signo de ambos componentes (útil para apuntar hacia un punto)."
+			},
+			{
+				"nombre": "tangente",
+				"firma": "tangente(angulo decimal) decimal",
+				"doc": "Tangente del ángulo en radianes."
+			},
+			{
+				"nombre": "potencia",
+				"firma": "potencia(base decimal, exponente decimal) decimal",
+				"doc": "`base` elevada a `exponente`; por ejemplo potencia(2, 10) es 1024."
+			},
+			{
+				"nombre": "signo",
+				"firma": "signo(valor decimal) decimal",
+				"doc": "-1 si el valor es negativo, 1 si es positivo y 0 si es cero; con enteros devuelve un entero."
+			},
+			{
+				"nombre": "distancia",
+				"firma": "distancia(x1 decimal, y1 decimal, x2 decimal, y2 decimal) decimal",
+				"doc": "Distancia entre los puntos (x1, y1) y (x2, y2)."
+			},
+			{
+				"nombre": "angulo",
+				"firma": "angulo(x1 decimal, y1 decimal, x2 decimal, y2 decimal) decimal",
+				"doc": "Ángulo en radianes de la dirección que va del punto (x1, y1) al punto (x2, y2); útil para apuntar."
+			},
+			{
+				"nombre": "radianes",
+				"firma": "radianes(grados decimal) decimal",
+				"doc": "Convierte grados a radianes."
+			},
+			{
+				"nombre": "grados",
+				"firma": "grados(radianes decimal) decimal",
+				"doc": "Convierte radianes a grados."
+			}
+		]
+	},
+	{
+		"nombre": "pincel",
+		"ruta": "std/pincel",
+		"doc": "El núcleo del motor de juegos: pincel.ejecutar arranca el bucle de juego a partir de un valor que implemente pincel.Juego.",
+		"tipos": [
+			{
+				"nombre": "Juego",
+				"doc": "La interfaz que debe implementar el valor pasado a pincel.ejecutar: actualizar(dt) para la lógica, pintar() para dibujar.",
+				"campos": [
+					"fn actualizar(dt decimal)",
+					"fn pintar()"
+				],
+				"interfaz": true
+			}
+		],
+		"funciones": [
+			{
+				"nombre": "ejecutar",
+				"firma": "ejecutar(instancia pincel.Juego, ancho entero = 320, alto entero = 180, titulo cadena = \"Cometa\", escala decimal = 1, redimensionable bool = falso, pantalla_completa bool = falso, tps entero = 60, pixelado bool = falso, retro bool = falso) !",
+				"doc": "Arranca el bucle de juego con `instancia` (que debe implementar pincel.Juego) y abre la ventana con la configuración dada. No retorna hasta que el juego se cierra."
+			},
+			{
+				"nombre": "salir",
+				"firma": "salir()",
+				"doc": "Pide cerrar el juego: la ventana se cierra al terminar el cuadro actual y pincel.ejecutar retorna."
+			}
+		]
+	},
+	{
+		"nombre": "pruebas",
+		"ruta": "std/pruebas",
+		"doc": "Afirmaciones para escribir pruebas: cada fn prueba_* falla en la primera afirmación incumplida. Se ejecutan con `cometa probar`.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "afirmar",
+				"firma": "afirmar(condicion bool, mensaje cadena = \"\")",
+				"doc": "Falla la prueba con el mensaje dado si la condición es falsa."
+			},
+			{
+				"nombre": "igual",
+				"firma": "igual(esperado cadena, obtenido cadena, mensaje cadena = \"\")",
+				"doc": "Falla la prueba si esperado y obtenido difieren. Acepta dos enteros, decimales, cadenas o bool del mismo tipo."
+			},
+			{
+				"nombre": "casi_igual",
+				"firma": "casi_igual(esperado decimal, obtenido decimal, tolerancia decimal = 0.000001, mensaje cadena = \"\")",
+				"doc": "Falla la prueba si esperado y obtenido difieren en más que la tolerancia (útil para decimales)."
+			},
+			{
+				"nombre": "fallar",
+				"firma": "fallar(mensaje cadena)",
+				"doc": "Falla la prueba de inmediato con el mensaje dado."
+			}
+		]
+	},
+	{
+		"nombre": "recursos",
+		"ruta": "std/pincel/recursos",
+		"doc": "Carga imágenes, fuentes y sonidos desde archivos, con la ruta relativa al archivo que los usa.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "imagen",
+				"firma": "imagen(ruta cadena) graficos.Imagen",
+				"doc": "Carga una imagen desde `ruta` (relativa al archivo que llama a esta función).",
+				"recurso": true
+			},
+			{
+				"nombre": "fuente",
+				"firma": "fuente(ruta cadena) graficos.Fuente",
+				"doc": "Carga una fuente desde `ruta` (relativa al archivo que llama a esta función).",
+				"recurso": true
+			},
+			{
+				"nombre": "sonido",
+				"firma": "sonido(ruta cadena) audio.Sonido",
+				"doc": "Carga un sonido desde `ruta` (relativa al archivo que llama a esta función).",
+				"recurso": true
+			}
+		]
+	},
+	{
+		"nombre": "rejilla",
+		"ruta": "std/pincel/rejilla",
+		"doc": "Una cuadrícula de números para mapas de tiles: crearla, leer y escribir celdas, dibujarla con una hoja de sprites y comprobar colisiones con celdas sólidas.",
+		"tipos": [
+			{
+				"nombre": "Rejilla",
+				"doc": "Una cuadrícula de enteros (por ejemplo un mapa de tiles) creada con rejilla.nueva o rejilla.desde_texto; es un objeto compartido, como los demás tipos.",
+				"metodos": [
+					{
+						"nombre": "columnas",
+						"firma": "columnas() entero",
+						"doc": "La cantidad de columnas de la rejilla."
+					},
+					{
+						"nombre": "filas",
+						"firma": "filas() entero",
+						"doc": "La cantidad de filas de la rejilla."
+					},
+					{
+						"nombre": "obtener",
+						"firma": "obtener(x entero, y entero) entero?",
+						"doc": "El valor de la celda (x, y), o .Ninguno si está fuera de la rejilla."
+					},
+					{
+						"nombre": "poner",
+						"firma": "poner(x entero, y entero, valor entero) bool",
+						"doc": "Escribe `valor` en la celda (x, y); devuelve falso si está fuera de la rejilla."
+					},
+					{
+						"nombre": "rellenar",
+						"firma": "rellenar(valor entero)",
+						"doc": "Pone `valor` en todas las celdas."
+					},
+					{
+						"nombre": "choca",
+						"firma": "choca(area mate.Rect, tamano_celda mate.Vec2, solidos [entero]) bool",
+						"doc": "verdadero si `area` toca alguna celda cuyo valor esté en `solidos`; `tamano_celda` es el tamaño de cada celda en el mundo. Lo que queda fuera de la rejilla nunca es sólido."
+					},
+					{
+						"nombre": "mover",
+						"firma": "mover(area mate.Rect, tamano_celda mate.Vec2, delta mate.Vec2, solidos [entero]) mate.Vec2",
+						"doc": "Desplaza `area` según `delta` (primero en x y luego en y) sin atravesar celdas sólidas y devuelve lo que realmente se movió: si el resultado en un eje es menor que `delta`, hubo un choque en ese eje. Usa pasos menores que una celda por llamada."
+					}
+				]
+			}
+		],
+		"funciones": [
+			{
+				"nombre": "nueva",
+				"firma": "nueva(columnas entero, filas entero, valor entero = 0) rejilla.Rejilla",
+				"doc": "Crea una rejilla de `columnas` x `filas` con todas las celdas en `valor` (usa -1 para «vacío» si vas a dibujarla con una hoja)."
+			},
+			{
+				"nombre": "desde_texto",
+				"firma": "desde_texto(filas [cadena], simbolos [cadena: entero]) rejilla.Rejilla",
+				"doc": "Crea una rejilla a partir de una fila de texto por fila de celdas; `simbolos` dice qué número vale cada carácter, por ejemplo [\"#\": 1, \".\": 0]. Un carácter desconocido o filas de distinto largo detienen el programa con un mensaje claro."
+			},
+			{
+				"nombre": "dibujar",
+				"firma": "dibujar(mapa rejilla.Rejilla, hoja graficos.Hoja, pos mate.Vec2 = {}, escala mate.Vec2 = {x: 1, y: 1}, tinte color.Color = .Blanco)",
+				"doc": "Dibuja cada celda de la rejilla como el cuadro con ese índice de la hoja, con la esquina superior izquierda en `pos`. Las celdas negativas o fuera de la hoja se omiten y las que quedan fuera de la pantalla no se dibujan.",
+				"dibujo": true
+			}
+		]
+	},
+	{
+		"nombre": "retro",
+		"ruta": "std/pincel/retro",
+		"doc": "Sprites y texto de estilo retro (DUNGEON.mode), listos para usar sin cargar ningún archivo. Ver examples/pincel/06_retro.cometa.",
+		"tipos": [
+			{
+				"nombre": "Atlas",
+				"doc": "Qué atlas retro usar al dibujar un glifo por índice: .Dungeon (gráfico) o .ASCII (texto Unicode).",
+				"constantes": [
+					".ASCII",
+					".Dungeon"
+				]
+			},
+			{
+				"nombre": "Icono",
+				"doc": "Un ícono con nombre del atlas retro DUNGEON-mode (por ejemplo .Corazon), para usar con retro.icono.",
+				"constantes": [
+					".Abajo",
+					".Arriba",
+					".Calavera",
+					".Corazon",
+					".CorazonVacio",
+					".Derecha",
+					".Escudo",
+					".Espada",
+					".Izquierda",
+					".Llave"
+				]
+			}
+		],
+		"funciones": [
+			{
+				"nombre": "texto",
+				"firma": "texto(texto cadena, x entero, y entero, escala entero = 1, color color.Color = .Blanco)",
+				"doc": "Dibuja `texto` en la fuente DUNGEON-437 (soporta acentos y ñ), en la posición (x, y) con el tamaño de escala entero dado.",
+				"dibujo": true
+			},
+			{
+				"nombre": "ancho_texto",
+				"firma": "ancho_texto(texto cadena, escala entero = 1) entero",
+				"doc": "Ancho en píxeles que ocupa `texto` con retro.texto a esa escala (8 píxeles por carácter); sirve para centrarlo."
+			},
+			{
+				"nombre": "icono",
+				"firma": "icono(icono retro.Icono, x entero, y entero, escala entero = 1, color color.Color = .Blanco)",
+				"doc": "Dibuja un ícono con nombre del atlas DUNGEON-mode (por ejemplo .Corazon o .Llave) en (x, y).",
+				"dibujo": true
+			},
+			{
+				"nombre": "glifo",
+				"firma": "glifo(indice entero, x entero, y entero, escala entero = 1, color color.Color = .Blanco, atlas retro.Atlas = .Dungeon)",
+				"doc": "Dibuja el glifo `indice` del atlas retro indicado (por defecto .Dungeon) en (x, y); útil para tilesets propios sobre el mismo atlas.",
+				"dibujo": true
+			},
+			{
+				"nombre": "ejecutar",
+				"firma": "ejecutar(instancia pincel.Juego, ancho entero = 320, alto entero = 200, titulo cadena = \"Cometa\", escala decimal = 4, redimensionable bool = falso, pantalla_completa bool = falso, tps entero = 60, pixelado bool = verdadero, retro bool = falso) !",
+				"doc": "Como pincel.ejecutar pero con valores por defecto pensados para juegos retro: ventana más pequeña, escala x4 y píxeles nítidos."
+			}
+		]
+	},
+	{
+		"nombre": "ruido",
+		"ruta": "std/mate/ruido",
+		"doc": "Ruido 2D pseudoaleatorio pero reproducible, útil para generar terrenos, texturas o variación orgánica a partir de una semilla.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "suave",
+				"firma": "suave(x decimal, y decimal, semilla entero = 0) decimal",
+				"doc": "Ruido 2D suave en (x, y), siempre en [0, 1] y reproducible: la misma semilla y coordenadas dan siempre el mismo resultado."
+			},
+			{
+				"nombre": "fractal",
+				"firma": "fractal(x decimal, y decimal, semilla entero = 0, octavas entero = 4, persistencia decimal = 0.5, lacunaridad decimal = 2.0) decimal",
+				"doc": "Como ruido.suave pero sumando varias octavas para un detalle más rico (piensa en montañas con relieve, no solo colinas)."
+			}
+		]
+	},
+	{
+		"nombre": "tiempo",
+		"ruta": "std/pincel/tiempo",
+		"doc": "Cuadros e imágenes por segundo reales del juego en ejecución, útiles para medir rendimiento.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "fps",
+				"firma": "fps() decimal",
+				"doc": "Cuadros por segundo reales que se están dibujando (varía con el rendimiento)."
+			},
+			{
+				"nombre": "tps",
+				"firma": "tps() decimal",
+				"doc": "Actualizaciones por segundo reales que se están ejecutando (compáralo con el `tps` configurado en pincel.ejecutar)."
+			}
+		]
+	},
+	{
+		"nombre": "ui",
+		"ruta": "std/pincel/ui",
+		"doc": "Interfaz inmediata (immediate-mode): declara la UI de cada cuadro (botones, casillas, texto) dentro de un contexto en árbol de filas, columnas y paneles.",
+		"tipos": [
+			{
+				"nombre": "Alineacion",
+				"doc": "Cómo alinear los hijos de un contenedor de interfaz dentro del espacio sobrante: .Inicio, .Centro o .Final.",
+				"constantes": [
+					".Centro",
+					".Final",
+					".Inicio"
+				]
+			},
+			{
+				"nombre": "AmbitoUI",
+				"doc": "Un contenedor abierto de la interfaz (fila, columna, panel...), devuelto por funciones como ui.fila para usarse con `con`.",
+				"metodos": [
+					{
+						"nombre": "entrar",
+						"firma": "entrar()",
+						"doc": "Entra al ámbito de este contenedor; se usa automáticamente al abrir un bloque `con` sobre él."
+					},
+					{
+						"nombre": "salir",
+						"firma": "salir()",
+						"doc": "Sale del ámbito de este contenedor; se usa automáticamente al cerrar el bloque `con`."
+					}
+				]
+			},
+			{
+				"nombre": "Bordes",
+				"doc": "Un relleno (padding) con un valor distinto por lado: izquierda, derecha, arriba y abajo.",
+				"campos": [
+					"izquierda decimal",
+					"derecha decimal",
+					"arriba decimal",
+					"abajo decimal"
+				]
+			},
+			{
+				"nombre": "Contexto",
+				"doc": "El estado de la interfaz inmediata entre cuadros; se crea una vez con ui.crear y se reutiliza en cada uno."
+			},
+			{
+				"nombre": "Medida",
+				"doc": "Cómo debe calcularse el tamaño de un elemento de interfaz: fijo, según su contenido, expandiendo o como porcentaje del espacio disponible."
+			},
+			{
+				"nombre": "Tema",
+				"doc": "Los colores, fuente y espaciado que usa la interfaz al dibujarse; ver ui.retro y ui.fuente para temas listos para usar.",
+				"campos": [
+					"fondo Color",
+					"normal Color",
+					"sobre Color",
+					"presionado Color",
+					"foco Color",
+					"deshabilitado Color",
+					"texto Color",
+					"espacio decimal"
+				]
+			}
+		],
+		"funciones": [
+			{
+				"nombre": "crear",
+				"firma": "crear() ui.Contexto",
+				"doc": "Crea un nuevo Contexto de interfaz. Se llama una sola vez; el mismo contexto se reutiliza en cada cuadro."
+			},
+			{
+				"nombre": "cuadro",
+				"firma": "cuadro(contexto ui.Contexto) ui.AmbitoUI",
+				"doc": "Empieza a declarar la interfaz de este cuadro dentro de `contexto`. Úsalo con `con` para delimitar el árbol de la UI."
+			},
+			{
+				"nombre": "pintar",
+				"firma": "pintar(contexto ui.Contexto)",
+				"doc": "Dibuja la interfaz declarada este cuadro. Llámalo al final, después de cerrar el bloque de ui.cuadro.",
+				"dibujo": true
+			},
+			{
+				"nombre": "captura_raton",
+				"firma": "captura_raton(contexto ui.Contexto) bool",
+				"doc": "verdadero si la interfaz está usando el ratón en este cuadro (útil para no mover también la cámara del juego, por ejemplo)."
+			},
+			{
+				"nombre": "captura_teclado",
+				"firma": "captura_teclado(contexto ui.Contexto) bool",
+				"doc": "verdadero si la interfaz está usando el teclado en este cuadro (por ejemplo, un campo de texto con foco)."
+			},
+			{
+				"nombre": "fijo",
+				"firma": "fijo(valor decimal) ui.Medida",
+				"doc": "Una Medida de tamaño exacto en píxeles."
+			},
+			{
+				"nombre": "contenido",
+				"firma": "contenido(minimo decimal = 0, maximo decimal = 1000000000) ui.Medida",
+				"doc": "Una Medida que se ajusta al contenido, opcionalmente acotada entre `minimo` y `maximo`."
+			},
+			{
+				"nombre": "expandir",
+				"firma": "expandir(minimo decimal = 0, maximo decimal = 1000000000) ui.Medida",
+				"doc": "Una Medida que crece para llenar el espacio disponible del contenedor padre."
+			},
+			{
+				"nombre": "porcentaje",
+				"firma": "porcentaje(fraccion decimal) ui.Medida",
+				"doc": "Una Medida como fracción del espacio disponible del contenedor padre (0 a 1)."
+			},
+			{
+				"nombre": "fila",
+				"firma": "fila(id cadena, ancho ui.Medida = contenido(), alto ui.Medida = contenido(), espacio decimal = -1, relleno ui.Bordes = {}, horizontal ui.Alineacion = .Inicio, vertical ui.Alineacion = .Inicio, desplazar bool = falso) ui.AmbitoUI",
+				"doc": "Un contenedor que acomoda a sus hijos en fila (uno junto al otro, horizontalmente). Ábrelo con `con`."
+			},
+			{
+				"nombre": "columna",
+				"firma": "columna(id cadena, ancho ui.Medida = contenido(), alto ui.Medida = contenido(), espacio decimal = -1, relleno ui.Bordes = {}, horizontal ui.Alineacion = .Inicio, vertical ui.Alineacion = .Inicio, desplazar bool = falso) ui.AmbitoUI",
+				"doc": "Un contenedor que acomoda a sus hijos en columna (uno debajo del otro, verticalmente). Ábrelo con `con`."
+			},
+			{
+				"nombre": "panel",
+				"firma": "panel(id cadena, ancho ui.Medida = contenido(), alto ui.Medida = contenido(), espacio decimal = -1, relleno ui.Bordes = {}, horizontal ui.Alineacion = .Inicio, vertical ui.Alineacion = .Inicio, desplazar bool = falso) ui.AmbitoUI",
+				"doc": "Un contenedor visual (con fondo) que agrupa a sus hijos como una columna."
+			},
+			{
+				"nombre": "texto",
+				"firma": "texto(valor cadena, ancho ui.Medida = contenido(), alto ui.Medida = contenido(), color color.Color = .Transparente)",
+				"doc": "Muestra una etiqueta de texto no interactiva."
+			},
+			{
+				"nombre": "imagen",
+				"firma": "imagen(imagen graficos.Imagen, ancho ui.Medida = contenido(), alto ui.Medida = contenido(), tinte color.Color = .Blanco)",
+				"doc": "Muestra una imagen dentro de la interfaz."
+			},
+			{
+				"nombre": "boton",
+				"firma": "boton(id cadena, etiqueta cadena, ancho ui.Medida = contenido(), alto ui.Medida = contenido(), habilitado bool = verdadero) bool",
+				"doc": "Un botón con `etiqueta`; devuelve verdadero en el cuadro en que se hace clic sobre él. `id` debe ser único dentro de su contenedor."
+			},
+			{
+				"nombre": "casilla",
+				"firma": "casilla(id cadena, valor bool, etiqueta cadena = \"\", ancho ui.Medida = contenido(), alto ui.Medida = contenido(), habilitado bool = verdadero) bool",
+				"doc": "Una casilla de verificación; devuelve el nuevo valor de `valor` tras el clic (o el mismo si no cambió)."
+			},
+			{
+				"nombre": "deslizador",
+				"firma": "deslizador(id cadena, valor decimal, minimo decimal = 0, maximo decimal = 1, ancho ui.Medida = fijo(120), alto ui.Medida = fijo(16), habilitado bool = verdadero) decimal",
+				"doc": "Un control deslizante entre `minimo` y `maximo`; devuelve el valor actual tras la interacción del usuario."
+			},
+			{
+				"nombre": "barra",
+				"firma": "barra(valor decimal, minimo decimal = 0, maximo decimal = 1, ancho ui.Medida = fijo(120), alto ui.Medida = fijo(10))",
+				"doc": "Una barra de progreso no interactiva que muestra `valor` entre `minimo` y `maximo`."
+			},
+			{
+				"nombre": "separador",
+				"firma": "separador(ancho ui.Medida = expandir(), alto ui.Medida = fijo(1))",
+				"doc": "Una línea delgada para separar visualmente secciones de la interfaz."
+			},
+			{
+				"nombre": "espacio",
+				"firma": "espacio(ancho ui.Medida = expandir(), alto ui.Medida = expandir())",
+				"doc": "Un hueco vacío, útil para empujar otros elementos o dejar aire entre ellos."
+			},
+			{
+				"nombre": "campo_texto",
+				"firma": "campo_texto(id cadena, valor cadena, ancho ui.Medida = contenido(0, 200), alto ui.Medida = contenido(), habilitado bool = verdadero) cadena",
+				"doc": "Un campo de texto editable; devuelve el contenido actual tras la edición del usuario."
+			},
+			{
+				"nombre": "retro",
+				"firma": "retro(escala entero = 1) ui.Tema",
+				"doc": "Un Tema con la paleta y fuente de std/pincel/retro, listo para pasar a ui.tema."
+			},
+			{
+				"nombre": "fuente",
+				"firma": "fuente(fuente graficos.Fuente, tamano decimal = 20) ui.Tema",
+				"doc": "Un Tema que usa `fuente` (y el `tamano` dado) para todo el texto de la interfaz."
+			},
+			{
+				"nombre": "tema",
+				"firma": "tema(tema ui.Tema) ui.AmbitoUI",
+				"doc": "Aplica `tema` a los elementos declarados dentro de este bloque `con`."
+			}
+		]
+	},
+	{
+		"nombre": "ventana",
+		"ruta": "std/pincel/ventana",
+		"doc": "Controla el título y el modo de pantalla completa de la ventana del juego.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "titulo",
+				"firma": "titulo(titulo cadena)",
+				"doc": "Cambia el texto de la barra de título de la ventana."
+			},
+			{
+				"nombre": "pantalla_completa",
+				"firma": "pantalla_completa(activa bool)",
+				"doc": "Activa o desactiva el modo de pantalla completa."
+			},
+			{
+				"nombre": "tamano",
+				"firma": "tamano() mate.Vec2",
+				"doc": "El tamaño actual de la ventana del sistema operativo, como Vec2."
+			}
+		]
+	}
+]
