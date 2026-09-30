@@ -1,5 +1,6 @@
 /** Enlaces compartidos del sitio. */
 export const GITHUB = 'https://github.com/crsolver/cometa';
+export const PESADILLA = 'https://github.com/crsolver/pesadilla';
 
 /** Ruta del sitio en GitHub Pages (https://crsolver.github.io/cometadev/). */
 export const BASE = '/cometadev';
