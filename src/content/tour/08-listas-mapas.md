@@ -58,7 +58,7 @@ edades["Marta"] = 11
 imprimir(edades["Pedro"] o 0)
 
 var conteo [cadena: entero] = [:]     // vacío: necesita su tipo
-conteo["el"] = (conteo["el"] o 0) + 1  // contar: leer con o, escribir sumando
+conteo["el"] += 1                     // contar: una clave ausente empieza en 0
 
 repetir (edades) |edad, nombre|     // valor primero, clave después; sin orden fijo
 	imprimir("${nombre}: ${edad}")
