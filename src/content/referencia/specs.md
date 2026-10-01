@@ -16,7 +16,7 @@ Un AST o modelo parcial nunca permite generar Go, construir ni ejecutar. Los err
 
 `usar std/mate/curvas` importa el namespace `curvas`, independiente de `std/mate` y de Ebitengine. Expone `lineal` y las familias `cuadratica`, `cubica`, `cuartica`, `quintica`, `senoidal`, `circular`, `exponencial`, `elastica`, `retroceso` y `rebote`, cada una con sufijos `_entrada`, `_salida` y `_entrada_salida`: 31 funciones puras `(progreso decimal) decimal`. Los enteros se amplían a decimal como en otras llamadas. Para progreso menor o igual a 0 devuelven exactamente 0; para progreso mayor o igual a 1 devuelven exactamente 1. Los infinitos se limitan a esos extremos y NaN se propaga. Solo se limita la entrada: las curvas elásticas y de retroceso conservan resultados fuera de [0, 1]. No administran tiempo ni estado. Véase [la API de curvas](docs/curvas.md).
 
-`usar std/mate` y `usar std/azar` importan matemáticas y azar sin Ebitengine. `usar std/pincel` importa el núcleo de Pincel (`pincel.ejecutar` y la interfaz `pincel.Juego`). El resto de Pincel son módulos independientes bajo `std/pincel/`: `graficos`, `color`, `entrada`, `audio`, `ventana`, `tiempo`, `recursos`, `retro`, `lienzo`, `rejilla`, `datos` y `ui`. El último segmento es el alias predeterminado; se admite `como`. `usar std/pincel` no importa los submódulos; no existe importación comodín ni reexportación implícita. Cada archivo importa lo que utiliza. `./std/...` sigue siendo una ruta local.
+`usar std/mate` y `usar std/azar` importan matemáticas y azar sin Ebitengine. `usar std/consola` expone `leer_linea() cadena?`, que espera una línea de la entrada estándar y la devuelve sin su salto de línea (`\n` o `\r\n`), o `Ninguno` cuando la entrada se acaba; una última línea sin salto final también se devuelve. `consola.escribir(texto cadena)` escribe sin salto de línea final. Tampoco requiere Ebitengine. Véase [el ejemplo de entrada](examples/basico/14_entrada.cometa). `usar std/pincel` importa el núcleo de Pincel (`pincel.ejecutar` y la interfaz `pincel.Juego`). El resto de Pincel son módulos independientes bajo `std/pincel/`: `graficos`, `color`, `entrada`, `audio`, `ventana`, `tiempo`, `recursos`, `retro`, `lienzo`, `rejilla`, `datos` y `ui`. El último segmento es el alias predeterminado; se admite `como`. `usar std/pincel` no importa los submódulos; no existe importación comodín ni reexportación implícita. Cada archivo importa lo que utiliza. `./std/...` sigue siendo una ruta local.
 
 Los tipos se califican: `mate.Vec2`, `mate.Rect`, `graficos.Camara2D`, `color.Color`, `entrada.Tecla`, `entrada.BotonRaton`, `graficos.Imagen`, `graficos.Fuente`, `audio.Sonido` y `audio.Reproduccion`. Los seis primeros conservan semántica de valor; los recursos son handles opacos compartidos. Sus nombres no están reservados globalmente. Se conservan operadores vectoriales, métodos, literales nombrados/posicionales y constantes contextuales.
 
@@ -531,13 +531,23 @@ Dentro de un `casos` usado como sentencia, `romper` y `continuar` siguen control
 
 ### `casos` sobre valores simples
 
-Con un `entero`, una `cadena` o un `bool`, las ramas usan literales (`1`, `-1`, `"a"`, `verdadero`) o nombres de constantes de este archivo declaradas con `const` y un valor literal (`moneda =>`); una rama puede listar varios separados por comas. No se admiten expresiones, interpolación, decimales, rangos ni el nombre `|x|`. Cada valor puede aparecer una sola vez, también si se escribe una vez como literal y otra como constante. Las constantes de otros módulos (`mod.nombre`) todavía no se admiten como ramas.
+Con un `entero`, una `cadena` o un `bool`, las ramas usan literales (`1`, `-1`, `"a"`, `verdadero`) o nombres de constantes de este archivo declaradas con `const` y un valor literal (`moneda =>`); una rama puede listar varios separados por comas. No se admiten expresiones, interpolación, decimales ni el nombre `|x|`. Cada valor puede aparecer una sola vez, también si se escribe una vez como literal y otra como constante. Las constantes de otros módulos (`mod.nombre`) todavía no se admiten como ramas.
 
 ```cometa
 casos tecla
 	1 => imprimir("uno")
 	2, 3 => imprimir("dos o tres")
 	_ => imprimir("otro")
+```
+
+Sobre un `entero`, una rama también puede ser un rango `inicio..fin`. Como en `repetir`, el fin no se incluye: `60..90` cubre de 60 a 89. Los extremos son enteros literales o constantes con valor entero, el inicio debe ser menor que el fin, y un rango puede combinarse con valores sueltos en la misma rama (`90..100, 100 =>`). Los rangos no pueden solaparse entre sí ni incluir un valor que ya aparece en otra rama. No hay rangos abiertos ni comparaciones (`>= 90`): lo que queda fuera lo recoge `_`.
+
+```cometa
+casos puntos
+	0..60 => imprimir("suspenso")
+	60..90 => imprimir("aprobado")
+	90..101 => imprimir("sobresaliente")
+	_ => imprimir("puntuación inválida")
 ```
 
 Como en los enums, `casos` debe ser exhaustivo: un `entero` o una `cadena` requieren una rama final `_`; un `bool` que cubre `verdadero` y `falso` no la necesita. Funciona como sentencia y como valor, con las mismas reglas de `romper`/`continuar`. El valor se evalúa una sola vez.

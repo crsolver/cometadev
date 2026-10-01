@@ -117,6 +117,24 @@
 		]
 	},
 	{
+		"nombre": "consola",
+		"ruta": "std/consola",
+		"doc": "Entrada y salida de texto para programas de consola: leer línea a línea lo que escribe la persona y escribir sin saltar de línea.",
+		"tipos": [],
+		"funciones": [
+			{
+				"nombre": "leer_linea",
+				"firma": "leer_linea() cadena?",
+				"doc": "Espera una línea de la entrada estándar y la devuelve sin el salto de línea final. Devuelve Ninguno cuando la entrada se acaba (fin de archivo, Ctrl+Z o Ctrl+D). Para leer un número: (consola.leer_linea() o \"\").recortar().a_entero()."
+			},
+			{
+				"nombre": "escribir",
+				"firma": "escribir(texto cadena)",
+				"doc": "Escribe el texto sin salto de línea al final, a diferencia de imprimir. Sirve para mostrar una pregunta y leer la respuesta en la misma línea."
+			}
+		]
+	},
+	{
 		"nombre": "curvas",
 		"ruta": "std/mate/curvas",
 		"doc": "31 funciones de easing puras (sin estado) para animar valores de forma más natural que una interpolación lineal. Ver docs/curvas.md.",
@@ -1075,7 +1093,7 @@
 	{
 		"nombre": "pruebas",
 		"ruta": "std/pruebas",
-		"doc": "Afirmaciones para escribir pruebas: cada fn prueba_* falla en la primera afirmación incumplida. Se ejecutan con `cometa probar`.",
+		"doc": "Afirmaciones para escribir pruebas: cada fn prueba_* falla en la primera afirmación incumplida. Se ejecutan con `cometa probar`. Para juegos, pruebas.avanzar y pruebas.pixel comprueban lo que se pinta en pantalla.",
 		"tipos": [],
 		"funciones": [
 			{
@@ -1097,6 +1115,21 @@
 				"nombre": "fallar",
 				"firma": "fallar(mensaje cadena)",
 				"doc": "Falla la prueba de inmediato con el mensaje dado."
+			},
+			{
+				"nombre": "avanzar",
+				"firma": "avanzar(juego pincel.Juego, cuadros entero = 1, ancho entero = 320, alto entero = 180, tps entero = 60)",
+				"doc": "Prueba visual: llama a actualizar del juego `cuadros` veces (con dt = 1/tps) y luego a pintar una vez sobre una pantalla oculta de ancho×alto. No lee el teclado ni el ratón reales. Solo funciona con `cometa probar`."
+			},
+			{
+				"nombre": "pantalla",
+				"firma": "pantalla() graficos.Imagen",
+				"doc": "Copia de la pantalla pintada por el último pruebas.avanzar, como graficos.Imagen (léela con lienzo.leer_pixel o guárdala con lienzo.guardar)."
+			},
+			{
+				"nombre": "pixel",
+				"firma": "pixel(x entero, y entero, esperado color.Color, tolerancia entero = 0, mensaje cadena = \"\")",
+				"doc": "Falla la prueba si el píxel (x, y) de la pantalla pintada por el último pruebas.avanzar no tiene el color esperado. `tolerancia` admite esa diferencia por canal (útil en bordes suavizados)."
 			}
 		]
 	},
