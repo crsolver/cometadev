@@ -46,7 +46,7 @@ cometa captura juego.cometa -o captura.png --escala 4 --cuadros 30
 
 Sin `-o`, la salida usa el mismo nombre base con la extensión `.go`. El compilador formatea y verifica los tipos del código Go antes de escribirlo. Los errores incluyen archivo, línea y columna.
 
-`captura` construye y ejecuta un juego de Pincel con la ventana oculta, guarda la pantalla lógica como PNG después de `--cuadros` actualizaciones (1 por defecto), ampliada por vecino más cercano con `--escala` (1–64), y termina. Sin `-o` escribe `<archivo>.png`. Los programas sin `pincel.ejecutar` se rechazan.
+`captura` construye y ejecuta un juego de Pincel con la ventana oculta, guarda la pantalla lógica como PNG después de `--cuadros` actualizaciones (1 por defecto), ampliada por vecino más cercano con `--escala` (1–64), y termina. Sin `-o` escribe `<archivo>.png`. Los programas sin `pincel.ejecutar` se rechazan. `--cuadros 100,300,900` toma varias capturas en una ejecución (`<salida>_100.png`, …). `--entrada guion.txt` sustituye el teclado y el ratón por un guion de líneas `<cuadro> <acciones>`: `+Tecla` mantiene, `-Tecla` suelta, `Tecla` pulsa un cuadro y `raton x y` mueve el puntero; los botones del ratón se escriben `RatonIzquierdo`, `RatonDerecho` y `RatonMedio`, y `#` inicia un comentario. Con guion y sin `--cuadros`, la captura se toma un cuadro después de la última acción. Ver [la guía de lienzo](docs/lienzo.md#simular-la-entrada).
 
 El mismo ejecutable inicia el servidor LSP mediante `cometa lsp`. El servidor se comunica por entrada/salida estándar, publica los errores del compilador al abrir, cambiar o guardar un documento, ofrece el esquema jerárquico del archivo, completa campos y métodos después de `.` o de `@` dentro de métodos, y muestra los tipos inferidos de variables y las firmas de funciones al pasar el cursor. Las líneas `//` consecutivas inmediatamente anteriores a una función se muestran como su documentación.
 
@@ -344,6 +344,12 @@ var valores = [10, 20]
 valores.agregar(30)
 imprimir(valores.buscar_indice(20) o -1)
 imprimir(valores.obtener(99) o 0)
+```
+
+El operador `+` une dos listas del mismo tipo y devuelve una lista nueva con almacenamiento independiente; ninguna de las dos se modifica. `lista += otra` equivale a `lista = lista + otra`. Para añadir un solo elemento se usa `agregar`.
+
+```cometa
+var cuadros = normales + espejados
 ```
 
 La asignación de una lista copia su descriptor de slice: cada alias conserva su propia longitud, aunque puede compartir el almacenamiento de los elementos. Por eso agregar mediante un alias no cambia la longitud de los demás; escribir, insertar, eliminar o invertir puede hacer visibles cambios de elementos en aliases que todavía compartan almacenamiento. Cambiar la longitud de un parámetro de lista tampoco cambia la variable del llamador. `copiar()` crea almacenamiento independiente, pero conserva las referencias contenidas.
