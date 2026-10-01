@@ -1,4 +1,5 @@
 ---
+import { CORREO } from '../lib/sitio';
 import Logo from './Logo.astro';
 ---
 
@@ -8,7 +9,9 @@ import Logo from './Logo.astro';
 			<Logo size={30} />
 			<p>Un lenguaje de programación en español, para aprender y para crear.</p>
 		</div>
-		<p class="derechos">Hecho con ☄️ para la comunidad hispanohablante.</p>
+		<p class="derechos">
+			Hecho con ☄️ para la comunidad hispanohablante. · <a href={`mailto:${CORREO}`}>{CORREO}</a>
+		</p>
 	</div>
 </footer>
 

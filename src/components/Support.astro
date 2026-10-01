@@ -1,0 +1,96 @@
+---
+import { CORREO } from '../lib/sitio';
+
+const motivos = [
+	{
+		icono: '💛',
+		titulo: 'Patrocinios y donaciones',
+		texto: 'Ayuda a que Cometa siga creciendo: tu apoyo financia el compilador, la documentación y los ejemplos.',
+		asunto: 'Patrocinio de Cometa',
+	},
+	{
+		icono: '🧭',
+		titulo: 'Consultorías',
+		texto: '¿Quieres usar Cometa en tu proyecto, curso o institución? Conversemos sobre lo que necesitas.',
+		asunto: 'Consultoría sobre Cometa',
+	},
+	{
+		icono: '📚',
+		titulo: 'Material educativo',
+		texto: 'Solicita guías, ejercicios o material a la medida para enseñar a programar en español.',
+		asunto: 'Material educativo de Cometa',
+	},
+];
+const enlace = (asunto: string) => `mailto:${CORREO}?subject=${encodeURIComponent(asunto)}`;
+---
+
+<section id="apoyar" class="seccion">
+	<div class="contenedor">
+		<div class="encabezado">
+			<span class="etiqueta">// apoyar</span>
+			<h2>Impulsa a <span class="resaltado">Cometa.</span></h2>
+			<p>
+				Cometa es un proyecto independiente. Si quieres patrocinarlo, hacer una donación o trabajar
+				conmigo, escríbeme por correo.
+			</p>
+		</div>
+
+		<ul class="motivos">
+			{
+				motivos.map((m) => (
+					<li class="tarjeta motivo">
+						<span class="icono" aria-hidden="true">{m.icono}</span>
+						<h3>{m.titulo}</h3>
+						<p>{m.texto}</p>
+						<a href={enlace(m.asunto)}>Escribir <span aria-hidden="true">→</span></a>
+					</li>
+				))
+			}
+		</ul>
+
+		<p class="contacto">
+			Para cualquier otra consulta: <a href={`mailto:${CORREO}`}>{CORREO}</a>
+		</p>
+	</div>
+</section>
+
+<style>
+	.motivos {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+		gap: 1.2rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.motivo {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+	}
+	.motivo p {
+		color: var(--tinta-suave);
+		flex: 1;
+	}
+	.motivo a {
+		font-weight: 700;
+		text-decoration: none;
+	}
+	.motivo a:hover {
+		text-decoration: underline;
+	}
+	.icono {
+		font-size: 1.8rem;
+		line-height: 1;
+		margin-bottom: 1rem;
+	}
+	.contacto {
+		margin: 2rem 0 0;
+		text-align: center;
+		color: var(--tinta-suave);
+	}
+	.contacto a {
+		font-family: var(--fuente-codigo);
+		font-size: 0.95em;
+	}
+</style>
