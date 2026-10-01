@@ -1,5 +1,6 @@
 /** Enlaces compartidos del sitio. */
 export const GITHUB = 'https://github.com/crsolver/cometa';
+export const DESCARGAS = GITHUB + '/releases/latest';
 export const PESADILLA = 'https://github.com/crsolver/pesadilla';
 export const CORREO = 'crsolver@proton.me';
 

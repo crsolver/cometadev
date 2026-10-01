@@ -1,17 +1,17 @@
 ---
 import CodeWindow from './CodeWindow.astro';
-import { GITHUB, url } from '../lib/sitio';
+import { DESCARGAS, GITHUB, url } from '../lib/sitio';
 
 const pasos = [
 	{
-		titulo: 'Construye el compilador',
-		texto: 'Necesitas Go 1.25+ y Node.js. Un solo comando compila la extensión y el ejecutable cometa.',
-		codigo: 'cd vscode-extension\nnpm install\nnpm run build',
+		titulo: 'Instala Cometa',
+		texto: 'Descarga cometa para tu sistema y ponlo en tu PATH. Necesitas además Go 1.25+, que Cometa usa para compilar tus programas.',
+		codigo: 'cometa --version',
 	},
 	{
 		titulo: 'Escribe y ejecuta',
-		texto: 'Crea hola.cometa con tu primer programa y ejecútalo directamente.',
-		codigo: 'cometa ejecutar hola.cometa',
+		texto: 'Crea un proyecto con tu primer programa y ejecútalo directamente.',
+		codigo: 'cometa nuevo hola\ncd hola\ncometa ejecutar principal.cometa',
 	},
 	{
 		titulo: 'Compártelo',
@@ -28,7 +28,7 @@ const pasos = [
 			<h2>Despega en <span class="resaltado">tres pasos.</span></h2>
 			<p>
 				Instala la extensión de VS Code para tener resaltado, errores en vivo y autocompletado mientras
-				escribes.
+				escribes. Los pasos están en la <a href={url('/guias/empezar/')}>guía para empezar</a>.
 			</p>
 		</div>
 
@@ -48,7 +48,8 @@ const pasos = [
 		<div class="cta">
 			<h3>¿Listo para escribir tu primera línea en español?</h3>
 			<div class="cta-acciones">
-				<a class="boton boton-principal" href={GITHUB}>Ver en GitHub <span aria-hidden="true">→</span></a>
+				<a class="boton boton-principal" href={DESCARGAS}>Descargar <span aria-hidden="true">→</span></a>
+				<a class="boton boton-secundario" href={GITHUB}>Ver en GitHub</a>
 				<a class="boton boton-secundario" href={url('/tour/')}>Hacer el tour</a>
 				<a class="boton boton-secundario" href={url('/biblioteca/')}>Biblioteca estándar</a>
 			</div>
